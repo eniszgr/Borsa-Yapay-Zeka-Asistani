@@ -1,0 +1,6 @@
+__pycache__/
+*.xlsx
+.env
+.DS_Store   
+google_apı.py
+hisse_bilgi.py
