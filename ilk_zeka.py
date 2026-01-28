@@ -52,7 +52,7 @@ class borsa_muhasebe:
         olasılık=self.model.predict_proba(bugun)[0]
 
         if tahmin==1:
-            return{"yön":"YÜKSELİŞ","güven":round(olasılık[1]*100, 2)}
+            return{"yön":"yükselis","güven":round(olasılık[1]*100, 2)}
         else:
-            return{"yön":"AŞAĞI","güven":round(olasılık[0]*100, 2)}
+            return{"yön":"düsüs","güven":round(olasılık[0]*100, 2)}
         
