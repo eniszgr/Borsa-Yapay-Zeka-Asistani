@@ -16,7 +16,7 @@ Burada yer alan bilgi, yorum ve tavsiyeler Yatırım Danışmanlığı kapsamın
 
 Gerekli kütüphaneleri yüklemek için:
 
-Geliştirici: Musab DUMAN, Enis ÖZGÜR
+Geliştirici: Musab DUMAN
 
 ```pip install -r requirements.txt```
 
