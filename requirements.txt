@@ -4,3 +4,4 @@ google-genai
 duckduckgo-search
 numpy
 openpyxl
+ollama

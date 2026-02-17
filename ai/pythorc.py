@@ -63,9 +63,14 @@ class deeplearning:
         
         features = ['Close', 'RSI', 'MACD', 'Bollinger_Konum', 'Hacim_degisimi', 'Momentum']
 
+        df = df.replace([np.inf, -np.inf], np.nan)
         son_gün_verisi=df[features].iloc[[-1]].values
 
         df_clean=df.dropna(subset=features+['Target'])
+        
+        if df_clean.empty:
+             return {"yön": "YETERSİZ VERİ", "güven": "0", "suanki_fiyat": 0, "tahmin": 0}
+
 
         x_data=df_clean[features].values
         y_data=df_clean[['Target']].values
@@ -98,6 +103,16 @@ class deeplearning:
         sonuc=self.model(son_gün_tensor)
         sonuc=y_scaler.inverse_transform(sonuc.detach().numpy())
 
-        return f"Yarınki fiyat tahmini {sonuc[0][0]:.2f}"
+        suanki_fiyat = data['Close'].iloc[-1]
+        tahmin_fiyat = sonuc[0][0]
+        guven = max(0, min(100, int(100 - abs(tahmin_fiyat - suanki_fiyat) / suanki_fiyat * 100)))
+        yon = "YÜKSELİŞ" if tahmin_fiyat > suanki_fiyat else "DÜŞÜŞ"
+
+        return {
+            "suanki_fiyat": round(suanki_fiyat, 2),
+            "tahmin": round(tahmin_fiyat, 2),
+            "güven": guven,
+            "yön": yon
+        }
         
         

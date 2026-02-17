@@ -16,7 +16,7 @@ class Gemini(BaseLLM):
         self.client=genai.Client(api_key=api_key)
         self.model=model
     
-    def build_prompt(self,sembol,temel,df,haberler_listesi,ai_rapor):
+    def build_prompt(self,temel,sembol,df,haberler_listesi,ai_rapor):
 
         son_veriler = df.tail(20).to_string() if not df.empty else "Yeterli veri yok."
         
@@ -113,7 +113,7 @@ class OllamaLLM(BaseLLM):
             return text
         return text.encode("ascii", "ignore").decode("utf-8")
     
-    def build_prompt(self,df, haberler_listesi, ai_rapor, analiz_sonucu):
+    def build_prompt(self, temel, sembol, df, haberler_listesi, ai_rapor, analiz_sonucu, **kwargs):
         son_veriler = df.tail(20).to_string()
         ai_rapor_safe = self.ollama_safe(ai_rapor)
         analiz_sonucu_safe = self.ollama_safe(analiz_sonucu)

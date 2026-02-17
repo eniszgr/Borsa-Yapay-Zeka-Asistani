@@ -1,3 +1,7 @@
+
+import os
+from dotenv import load_dotenv
+
 import sys
 import time
 import warnings
@@ -9,13 +13,14 @@ from indicators.technical import teknik_analiz
 from ai.pythorc import deeplearning
 from ai.llm import Gemini, OllamaLLM
 
-import os
-from dotenv import load_dotenv
 
 sys.stdout.reconfigure(encoding='utf-8')
 warnings.filterwarnings('ignore')
 
-GOOGLE_API_KEY="Buraya gemini apı keyinizi yazınız" 
+load_dotenv()
+
+GEMINI_KEY = os.getenv("GEMINI_API_KEY")
+print(GEMINI_KEY)
 
 pd.options.display.float_format = '{:.2f}'.format
 
@@ -94,14 +99,14 @@ def haber_verileri(sembol):
     try:
         with DDGS() as ddgs:
             query = f"{sembol.replace('.IS','')} hisse haberleri"
-            result = ddgs.news(keywords=query, region="tr-tr", safesearch="off", max_results=5)
+            result = ddgs.news(query, region="tr-tr", safesearch="off", max_results=5)
             for r in result:
                 tarih = r.get('date', '')[:10]
                 baslik = r.get('title', 'Başlık yok')
                 kaynak = r.get('source', 'Bilinmiyor')
                 haberler_listesi.append(f"-[{tarih}]{kaynak}:{baslik}")
-    except:
-        print("Haber verisi cekilemedi")
+    except Exception as e:
+        print(f"Haber verisi cekilemedi. Hata: {e}")
     return haberler_listesi
 
 def muhasebeci(hisse,bot=deeplearning): 
@@ -133,7 +138,7 @@ def mod_tekli_detayli(gemini_bot, ollama_bot, dl_bot):
 
         print("\nYapay Zekalar Yorumluyor, lütfen bekleyin...\n")
         analiz_sonucu = gemini_bot(temel, sembol, df, haberler_listesi, ai_rapor)
-        final_rapor = ollama_bot(temel, sembol, df, haberler_listesi, ai_rapor, analiz_sonucu, model="qwen3:4b")
+        final_rapor = ollama_bot(temel, sembol, df, haberler_listesi, ai_rapor, analiz_sonucu)
         
         print("="*60)
         print(f"BÜYÜK RESİM (OLLAMA + GEMİNİ): \n{final_rapor}")
@@ -178,7 +183,7 @@ def mod_bist30_tarama(gemini_bot, ollama_bot, dl_bot):
         ai_rapor = muhasebeci(hisse, dl_bot)
         
         analiz_sonucu = gemini_bot(temel, sembol, df, haberler, ai_rapor)
-        final_rapor = ollama_bot(temel, sembol, df, haberler, ai_rapor, analiz_sonucu, model="qwen3:4b")
+        final_rapor = ollama_bot(temel, sembol, df, haberler, ai_rapor, analiz_sonucu)
         
         print(50*'*')
         print(final_rapor)
@@ -224,7 +229,7 @@ def main():
     gemini_apı_key=os.getenv("GEMINI_API_KEY","API_KEY_YOK")
     
     gemini_yorumla=Gemini(api_key=gemini_apı_key)
-    ollama_yorumla=OllamaLLM(model="gwen3:4b")
+    ollama_yorumla=OllamaLLM(model="qwen3:4b")
     dl_bot=deeplearning()
     
     while True:
