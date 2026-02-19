@@ -1,0 +1,56 @@
+services:
+
+  # 1. Konteyner: Ollama Sunucusu (GPU destekli)
+  ollama-server:
+    image: ollama/ollama:latest
+    container_name: ollama-servis
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+  # 2. Konteyner: Model Yukleyici (bir kez calisir, cikar)
+  ollama-model-puller:
+    image: ollama/ollama:latest
+    container_name: ollama-model-yukleyici
+    depends_on:
+      ollama-server:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama-server:11434
+    entrypoint: ["ollama", "pull", "qwen3:4b"]
+    restart: "no"
+
+  # 3. Konteyner: Python Uygulamasi
+  trading-bot:
+    build: .
+    container_name: borsa-asistani
+    stdin_open: true
+    tty: true
+    depends_on:
+      ollama-server:
+        condition: service_healthy
+      ollama-model-puller:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    environment:
+      - OLLAMA_HOST=http://ollama-server:11434
+    restart: on-failure
+
+volumes:
+  ollama_data:

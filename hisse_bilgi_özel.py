@@ -1,4 +1,3 @@
-
 import os
 from dotenv import load_dotenv
 
@@ -20,34 +19,45 @@ warnings.filterwarnings('ignore')
 load_dotenv()
 
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
-print(GEMINI_KEY)
 
 pd.options.display.float_format = '{:.2f}'.format
 
-BIST30_LISTESI=[ "AKBNK.IS", "ALARK.IS", "ASELS.IS", "ASTOR.IS", "BIMAS.IS", "BRSAN.IS","CIMSA.IS","SISE.IS","CVKMD.IS","PETKM.IS","TKFEN.IS","ANHYT.IS","CCOLA.IS",
-                "DOAS.IS", "EKGYO.IS", "ENKAI.IS", "EREGL.IS", "FROTO.IS", "GARAN.IS","GUBRF.IS", "ULKER.IS", "ISCTR.IS", "KCHOL.IS", "KONTR.IS", "KOZAL.IS",
-                "KRDMD.IS", "ODAS.IS", "OYAKC.IS", "PETKM.IS", "PGSUS.IS", "SAHOL.IS","SASA.IS", "SISE.IS", "TCELL.IS", "THYAO.IS", "TOASO.IS", "TUPRS.IS", "YKBNK.IS",
-                "SMRTG.IS","POLHO.IS","ECILC.IS","BORSK.IS","ISCTR.IS","ZOREN.IS","ALFAS.IS"]
+BIST30_LISTESI = [
+    "AKBNK.IS", "ALARK.IS", "ASELS.IS", "ASTOR.IS", "BIMAS.IS", "BRSAN.IS",
+    "CIMSA.IS", "SISE.IS", "CVKMD.IS", "PETKM.IS", "TKFEN.IS", "ANHYT.IS",
+    "CCOLA.IS", "DOAS.IS", "EKGYO.IS", "ENKAI.IS", "EREGL.IS", "FROTO.IS",
+    "GARAN.IS", "GUBRF.IS", "ULKER.IS", "ISCTR.IS", "KCHOL.IS", "KONTR.IS",
+    "KOZAL.IS", "KRDMD.IS", "ODAS.IS", "OYAKC.IS", "PETKM.IS", "PGSUS.IS",
+    "SAHOL.IS", "SASA.IS", "SISE.IS", "TCELL.IS", "THYAO.IS", "TOASO.IS",
+    "TUPRS.IS", "YKBNK.IS", "SMRTG.IS", "POLHO.IS", "ECILC.IS", "BORSK.IS",
+    "ISCTR.IS", "ZOREN.IS", "ALFAS.IS"
+]
 
-BIST100_LISTESI= [
-            "AEFES.IS", "AGHOL.IS", "AKBNK.IS", "AKCNS.IS", "AKSA.IS", "AKSEN.IS", "ALARK.IS", "ALBRK.IS", "ALGYO.IS", "ALKIM.IS",
-            "ARCLK.IS", "ASELS.IS", "ASTOR.IS", "BERA.IS", "BIMAS.IS", "BRSAN.IS", "BRYAT.IS", "BUCIM.IS", "CANTE.IS", "CCOLA.IS",
-            "CEMTS.IS", "CIMSA.IS", "DOAS.IS", "DOHOL.IS", "ECILC.IS", "EGEEN.IS", "EKGYO.IS", "ENJSA.IS", "ENKAI.IS", "EREGL.IS",
-            "EUREN.IS", "FROTO.IS", "GARAN.IS", "GENIL.IS", "GESAN.IS", "GLYHO.IS", "GUBRF.IS", "HALKB.IS", "HEKTS.IS", "IPEKE.IS",
-            "ISCTR.IS", "ISDMR.IS", "ISGYO.IS", "ISMEN.IS", "IZMDC.IS", "KARSN.IS", "KCAER.IS", "KCHOL.IS", "KONTR.IS", "KORDS.IS",
-            "KOZAL.IS", "KOZAA.IS", "KRDMD.IS", "MGROS.IS", "ODAS.IS", "OTKAR.IS", "OYAKC.IS", "PETKM.IS", "PGSUS.IS", "SAHOL.IS",
-            "SASA.IS", "SISE.IS", "SKBNK.IS", "SMRTG.IS", "SNGYO.IS", "SOKM.IS", "TAVHL.IS", "TCELL.IS", "THYAO.IS", "TKFEN.IS",
-            "TOASO.IS", "TSKB.IS", "TTKOM.IS", "TTRAK.IS", "TUKAS.IS", "TUPRS.IS", "ULKER.IS", "VAKBN.IS", "VESBE.IS", "VESTL.IS",
-            "YKBNK.IS", "YYLGD.IS", "ZOREN.IS"
-        ]
+BIST100_LISTESI = [
+    "AEFES.IS", "AGHOL.IS", "AKBNK.IS", "AKCNS.IS", "AKSA.IS", "AKSEN.IS",
+    "ALARK.IS", "ALBRK.IS", "ALGYO.IS", "ALKIM.IS", "ARCLK.IS", "ASELS.IS",
+    "ASTOR.IS", "BERA.IS", "BIMAS.IS", "BRSAN.IS", "BRYAT.IS", "BUCIM.IS",
+    "CANTE.IS", "CCOLA.IS", "CEMTS.IS", "CIMSA.IS", "DOAS.IS", "DOHOL.IS",
+    "ECILC.IS", "EGEEN.IS", "EKGYO.IS", "ENJSA.IS", "ENKAI.IS", "EREGL.IS",
+    "EUREN.IS", "FROTO.IS", "GARAN.IS", "GENIL.IS", "GESAN.IS", "GLYHO.IS",
+    "GUBRF.IS", "HALKB.IS", "HEKTS.IS", "IPEKE.IS", "ISCTR.IS", "ISDMR.IS",
+    "ISGYO.IS", "ISMEN.IS", "IZMDC.IS", "KARSN.IS", "KCAER.IS", "KCHOL.IS",
+    "KONTR.IS", "KORDS.IS", "KOZAL.IS", "KOZAA.IS", "KRDMD.IS", "MGROS.IS",
+    "ODAS.IS", "OTKAR.IS", "OYAKC.IS", "PETKM.IS", "PGSUS.IS", "SAHOL.IS",
+    "SASA.IS", "SISE.IS", "SKBNK.IS", "SMRTG.IS", "SNGYO.IS", "SOKM.IS",
+    "TAVHL.IS", "TCELL.IS", "THYAO.IS", "TKFEN.IS", "TOASO.IS", "TSKB.IS",
+    "TTKOM.IS", "TTRAK.IS", "TUKAS.IS", "TUPRS.IS", "ULKER.IS", "VAKBN.IS",
+    "VESBE.IS", "VESTL.IS", "YKBNK.IS", "YYLGD.IS", "ZOREN.IS"
+]
 
 
-def sembol_temizle(metin:str)->str:
+def sembol_temizle(metin: str) -> str:
     tr_map = str.maketrans("igusocIGUSOC", "igusocIGUSOC")
     temiz_metin = metin.translate(tr_map).upper().strip()
     if not temiz_metin.endswith(".IS"):
         temiz_metin += ".IS"
     return temiz_metin
+
 
 def temel_veriler(hisse):
     info = hisse.info
@@ -63,8 +73,9 @@ def temel_veriler(hisse):
     }
     return temel
 
-def input_alma()->tuple:
-    while True:    
+
+def input_alma() -> tuple:
+    while True:
         ham_girdi = input("Bilgi almak istediginiz hissenin ismini giriniz: ").upper()
         sembol = sembol_temizle(ham_girdi)
         try:
@@ -76,6 +87,7 @@ def input_alma()->tuple:
             return hisse, sembol, df
         except Exception as e:
             print(f"Baglanti hatasi: {e}")
+
 
 def sinyal_kontrol(df):
     try:
@@ -92,13 +104,14 @@ def sinyal_kontrol(df):
             return True, "Erken uyari"
         return False, "Temiz"
     except KeyError as e:
-        return False,f"Eksik bilgi indikatör verisi: {e}"
+        return False, f"Eksik indikatör verisi: {e}"
+
 
 def haber_verileri(sembol):
     haberler_listesi = []
     try:
         with DDGS() as ddgs:
-            query = f"{sembol.replace('.IS','')} hisse haberleri"
+            query = f"{sembol.replace('.IS', '')} hisse haberleri"
             result = ddgs.news(query, region="tr-tr", safesearch="off", max_results=5)
             for r in result:
                 tarih = r.get('date', '')[:10]
@@ -109,27 +122,34 @@ def haber_verileri(sembol):
         print(f"Haber verisi cekilemedi. Hata: {e}")
     return haberler_listesi
 
-def muhasebeci(hisse,bot=deeplearning): 
+
+def muhasebeci(hisse, bot=None):
+    if bot is None:
+        bot = deeplearning()
     try:
         df_muhasebeci = hisse.history(period="4y")
         sonuc = bot.analiz_et(df_muhasebeci)
-
-        return f"Yapay Zeka (Deep Learning) Modeli; {sonuc['suanki_fiyat']} TL olan güncel fiyatın, %{sonuc['güven']} güven skoruyla {sonuc['tahmin']} TL hedefine ulaşacağını ve ana yönün {sonuc['yön']} olacağını öngörüyor."
+        return (
+            f"Yapay Zeka (Deep Learning) Modeli; {sonuc['suanki_fiyat']} TL olan güncel fiyatın, "
+            f"%{sonuc['güven']} güven skoruyla {sonuc['tahmin']} TL hedefine ulaşacağını "
+            f"ve ana yönün {sonuc['yön']} olacağını öngörüyor."
+        )
     except Exception as e:
         return f"Deeplearning'de hata: {e}"
+
 
 def mod_tekli_detayli(gemini_bot, ollama_bot, dl_bot):
     """MOD 1: Tek bir hisse için baştan sona analiz."""
     hisse, sembol, df = input_alma()
-    
+
     try:
         print(f"\n{sembol} için teknik ve temel veriler hesaplanıyor...")
         df = teknik_analiz(df)
         temel = temel_veriler(hisse)
         ai_rapor = muhasebeci(hisse, dl_bot)
         haberler_listesi = haber_verileri(sembol)
-        
-        # Excel'e kaydetme işlemi
+
+        # Excel'e kaydetme
         df_export = df.drop(["Dividends", "Stock Splits", "Volume"], axis=1, errors="ignore")
         df_export.index = df_export.index.tz_localize(None)
         excel_isim = f"{sembol}_detayli_analiz.xlsx"
@@ -139,38 +159,40 @@ def mod_tekli_detayli(gemini_bot, ollama_bot, dl_bot):
         print("\nYapay Zekalar Yorumluyor, lütfen bekleyin...\n")
         analiz_sonucu = gemini_bot(temel, sembol, df, haberler_listesi, ai_rapor)
         final_rapor = ollama_bot(temel, sembol, df, haberler_listesi, ai_rapor, analiz_sonucu)
-        
-        print("="*60)
+
+        print("=" * 60)
         print(f"BÜYÜK RESİM (OLLAMA + GEMİNİ): \n{final_rapor}")
-        print("="*60)
+        print("=" * 60)
         print(f"DEEP LEARNING: {ai_rapor}")
-        
+
     except Exception as e:
         print(f"Analiz sırasında beklenmeyen hata: {e}")
+
 
 def mod_bist30_tarama(gemini_bot, ollama_bot, dl_bot):
     """MOD 2: BIST30 içinde fırsat veren hisseleri tarar."""
     print("\nBIST 30 Taraması Başlıyor...")
     firsat_listesi = []
-    
+
     for sembol in BIST30_LISTESI:
         try:
             hisse = yf.Ticker(sembol)
             df = hisse.history(period="1y")
-            if df.empty: continue
-            
+            if df.empty:
+                continue
+
             df = teknik_analiz(df)
             durum, sinyal = sinyal_kontrol(df)
-            
+
             if durum:
                 print(f"[+] Fırsat tespit edildi: {sembol} ({sinyal}) listeye ekleniyor...")
                 firsat_listesi.append((sembol, hisse, df))
             else:
                 print(f"[-] {sembol}: {sinyal}")
-                
+
         except Exception as e:
             print(f"Hata ({sembol}): {e}")
-            
+
     if not firsat_listesi:
         print("\nBu BIST30 listesinde aktif yükseliş trendi/formasyonu bulunan hisse bulunamadı :(")
         return
@@ -181,75 +203,80 @@ def mod_bist30_tarama(gemini_bot, ollama_bot, dl_bot):
         temel = temel_veriler(hisse)
         haberler = haber_verileri(sembol)
         ai_rapor = muhasebeci(hisse, dl_bot)
-        
+
         analiz_sonucu = gemini_bot(temel, sembol, df, haberler, ai_rapor)
         final_rapor = ollama_bot(temel, sembol, df, haberler, ai_rapor, analiz_sonucu)
-        
-        print(50*'*')
+
+        print(50 * '*')
         print(final_rapor)
-        print(50*'*')
-        time.sleep(15) # API limitlerine takılmamak için
+        print(50 * '*')
+        time.sleep(15)  # API limitlerine takılmamak için
+
 
 def mod_mega_tarama(dl_bot):
     """MOD 4: Sadece yerel PyTorch modeli ile BIST100'ü hızlıca tarar."""
-    print("\n🚀 MEGA TARAMA MODU BAŞLATILIYOR (Sadece Yerel Yapay Zeka)")
+    print("\nMEGA TARAMA MODU BAŞLATILIYOR (Sadece Yerel Yapay Zeka)")
     yukselis_beklenenler = []
 
     for sembol in BIST100_LISTESI:
         try:
-            print(f"Analiz ediliyor: {sembol:<10}", end="\r") 
+            print(f"Analiz ediliyor: {sembol:<10}", end="\r")
             hisse = yf.Ticker(sembol)
             df = hisse.history(period="1y")
-            if df.empty: continue
-            
-            sonuc = dl_bot.analiz_et(df) 
-            yazi_rengi = "🚀" if "YÜKSELİŞ" in str(sonuc.get('yön', '')).upper() else "🔻"
+            if df.empty:
+                continue
+
+            sonuc = dl_bot.analiz_et(df)
+            yazi_rengi = "YUKSELIS" if "YÜKSELİŞ" in str(sonuc.get('yön', '')).upper() else "DUSUS"
             guven = sonuc.get('güven', 0)
-            
-            print(f"[{sembol:<10}] -> %{guven:<4} {sonuc.get('yön', 'N/A')} {yazi_rengi}")
-            
+
+            print(f"[{sembol:<10}] -> %{guven:<4} {sonuc.get('yön', 'N/A')} [{yazi_rengi}]")
+
             if "YÜKSELİŞ" in str(sonuc.get('yön', '')).upper() and guven > 60:
                 yukselis_beklenenler.append((sembol, guven))
-                
+
             time.sleep(0.2)
 
         except Exception as e:
             print(f"[{sembol}] Analiz Hatası: {e}")
-            
-    print("\n" + "="*40)
-    print(f"🏆 TARAMA BİTTİ! FIRSAT LİSTESİ ({len(yukselis_beklenenler)} Adet)")
-    print("="*40)
-    
+
+    print("\n" + "=" * 40)
+    print(f"TARAMA BİTTİ! FIRSAT LİSTESİ ({len(yukselis_beklenenler)} Adet)")
+    print("=" * 40)
+
     yukselis_beklenenler.sort(key=lambda x: x[1], reverse=True)
     for hisse, guven in yukselis_beklenenler:
-        print(f"⭐ {hisse:<10} - Güven: %{guven}")
-    print("="*40 + "\n")
- 
-def main(): 
-    gemini_apı_key=os.getenv("GEMINI_API_KEY","API_KEY_YOK")
-    
-    gemini_yorumla=Gemini(api_key=gemini_apı_key)
-    ollama_yorumla=OllamaLLM(model="qwen3:4b")
-    dl_bot=deeplearning()
-    
+        print(f"* {hisse:<10} - Güven: %{guven}")
+    print("=" * 40 + "\n")
+
+
+def main():
+    gemini_api_key = os.getenv("GEMINI_API_KEY", "API_KEY_YOK")
+
+    # OllamaLLM artık OLLAMA_HOST env variable'ını kendi içinde okuyor.
+    # Docker içinde http://ollama-server:11434, dışında http://localhost:11434 kullanır.
+    gemini_yorumla = Gemini(api_key=gemini_api_key)
+    ollama_yorumla = OllamaLLM(model="qwen3:4b")
+    dl_bot = deeplearning()
+
     while True:
-        print("\n" + "="*40)
-        print("🤖 HİSSE ANALİZ YAPAY ZEKA ASİSTANI")
-        print("="*40)
+        print("\n" + "=" * 40)
+        print("HISSE ANALIZ YAPAY ZEKA ASISTANI")
+        print("=" * 40)
         print("1. Tek Hisse Detaylı Analiz (Gemini + Ollama + PyTorch)")
         print("2. BIST30 Fırsat Taraması (Detaylı)")
         print("3. Tek Hisse Sadece Sayısal Tahmin (PyTorch)")
         print("4. BIST100 Mega Tarama (Sadece PyTorch Hızlı Tarama)")
         print("0. Çıkış")
-        print("="*40)
-        
+        print("=" * 40)
+
         secim = input("Lütfen bir işlem seçiniz (0-4): ").strip()
-    
+
         if secim == "0":
             print("Sistemden çıkılıyor. Bol kazançlar!")
             break
         elif secim == "1":
-            mod_tekli_detayli(gemini_yorumla, ollama_yorumla, dl_bot)        
+            mod_tekli_detayli(gemini_yorumla, ollama_yorumla, dl_bot)
         elif secim == "2":
             mod_bist30_tarama(gemini_yorumla, ollama_yorumla, dl_bot)
         elif secim == "3":
@@ -261,5 +288,6 @@ def main():
         else:
             print("Geçersiz tuşlama! Lütfen menüdeki numaralardan birini girin.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
