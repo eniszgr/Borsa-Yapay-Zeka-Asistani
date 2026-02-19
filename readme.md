@@ -11,11 +11,22 @@ Bu proje, Borsa İstanbul (BIST) verilerini çekerek teknik ve temel analiz veri
 
 ## 🛠️ Kurulum
 
-Gerekli kütüphaneleri yüklemek için:
 ⚠️ Yasal Uyarı
 Burada yer alan bilgi, yorum ve tavsiyeler Yatırım Danışmanlığı kapsamında değildir. Yapay zeka tarafından üretilen içerikler hata barındırabilir. Yatırım kararlarınızı kendi araştırmanıza dayanarak vermeniz önerilir.
 
-Geliştirici: Musab Duman
-```bash
-pip install -r requirements.txt
+Gerekli kütüphaneleri yüklemek için:
+
+Geliştirici: Musab DUMAN
+
+```pip install -r requirements.txt```
+
+---
+### ⚠️ Önemli Not
+
+Bu projeyi **tam performansla** kullanabilmek için Ollama servisinin çalışır durumda olması gerekmektedir.
+
+Sistem, yerel olarak **qwen3:4b** modeli ile optimize edilmiştir ve tüm yapay zekâ analizleri en verimli şekilde bu model aktifken gerçekleştirilir.
+
+> ℹ️ Ollama servisi çalışmıyorsa bazı yapay zekâ özellikleri sınırlı olabilir veya devre dışı kalabilir.
+
 
