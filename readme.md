@@ -44,6 +44,10 @@ ile imagine dosyasını yükleyip .env.example dosyasındaki isimlere uygun şek
 ```docker run --env-file .env zgrenis/borsa-bot```
 
  kodu ile projeyi çalıştırabilirsiniz.
+
+Docker terminaline input vermek için ayrı bir terminalde aşağıdaki kodu yazarak docker terminaline erişibiliyoruz.
+
+ ```docker attach borsa-asistani```
  
 ### ⚙️Önemli Sistem Gereksinimi
 

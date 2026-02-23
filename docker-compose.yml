@@ -2,55 +2,55 @@ services:
 
   # 1. Konteyner: Ollama Sunucusu (GPU destekli)
   ollama-server:
-    image: ollama/ollama:latest
-    container_name: ollama-servis
+    image: ollama/ollama:latest # Ollama'nın resmi yazılımı ile tüm motor ve gerekli kütüphaneler indirilir.
+    container_name: ollama-servis # takma isim vererek olası hata durumlarında tespiti kolaylaştırıyor
     ports:
-      - "11434:11434"
+      - "11434:11434"  #portunu düzenledik
     volumes:
-      - ollama_data:/root/.ollama
-    deploy:
+      - ollama_data:/root/.ollama #ollama modellerini her seferinde yeniden indirmemek için kalıcı bir alan sağlanır.
+    deploy:               # GPU kaynaklarını kullanarak çalışması için gerekli ayarlar yapılır.
       resources:
         reservations:
           devices:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
-    healthcheck:
-      test: ["CMD-SHELL", "ollama list || exit 1"]
-      interval: 10s
-      timeout: 10s
-      retries: 10
-      start_period: 30s
-    restart: unless-stopped
+    healthcheck:        # sağlıklı çalışıyor mu
+      test: ["CMD-SHELL", "ollama list || exit 1"] # konteyner içinde ollama list çalıştır. Eğer hata alırsa exit 1 ile başarısız sayılır.
+      interval: 10s #10 sn bir kontrol
+      timeout: 10s #10 sn içinde cevap gelmezse başarısız sayılır.
+      retries: 10 #10 kere başarısız olursa konteyner sağlıksız sayılır.
+      start_period: 30s # ilk açıldığında 30 sn açılması için zaman tanı
+    restart: unless-stopped #olası hata alma kapanma durumlarında yeniden başlatır
 
   # 2. Konteyner: Model Yukleyici (bir kez calisir, cikar)
   ollama-model-puller:
-    image: ollama/ollama:latest
-    container_name: ollama-model-yukleyici
+    image: ollama/ollama:latest # modelin kaynağı belirtiliyor.
+    container_name: ollama-model-yukleyici # takma isim vererek olası hata durumlarında tespiti kolaylaştırıyor
     depends_on:
       ollama-server:
-        condition: service_healthy
+        condition: service_healthy # Ollama sunucusunun sağlıklı olduğunda çalışarak yükleme gerçekleşir. aksi halde hata vererek kapanır.
     environment:
       - OLLAMA_HOST=http://ollama-server:11434
-    entrypoint: ["ollama", "pull", "qwen3:4b"]
-    restart: "no"
+    entrypoint: ["ollama", "pull", "qwen3:4b"] #ollama-server açıldığında ilk iş modeli çekmek oluyor
+    restart: "no" # bir kere yükleme yapıldıktan sonra exit duruma geç. always yazılsa her 5dkde bir tekrar bağlanmaya çalışırdı.
 
   # 3. Konteyner: Python Uygulamasi
   trading-bot:
-    build: .
-    container_name: borsa-asistani
-    stdin_open: true
-    tty: true
-    depends_on:
+    build: .      # Dockerfile'ın bulunduğu dizinden imaj oluşturur.
+    container_name: borsa-asistani # takma isim vererek olası hata durumlarında tespiti kolaylaştırıyor
+    stdin_open: true # interaktif modda çalışması için gerekli
+    tty: true # terminal desteği için gerekli
+    depends_on: # ollama server sağlıklı çalışıyor ve model puller görevini başarılı yapmış olmalı
       ollama-server:
         condition: service_healthy
       ollama-model-puller:
         condition: service_completed_successfully
-    env_file:
+    env_file: #.env dosyası tanıtılıyor.
       - .env
     environment:
       - OLLAMA_HOST=http://ollama-server:11434
-    restart: on-failure
+    restart: on-failure # uygulama hata alırsa yeniden başlatır. sürekli döngüye girmemesi için on-failure kullanıldı.
 
-volumes:
+volumes: #yukarıda bahsedilenler için kalıcı depolama alanları tanımlanır.
   ollama_data:
