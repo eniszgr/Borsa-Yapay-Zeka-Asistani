@@ -30,7 +30,7 @@ Sistem, yerel olarak **qwen3:4b** modeli ile optimize edilmiştir ve tüm yapay 
 > ℹ️ Ollama servisi çalışmıyorsa bazı yapay zekâ özellikleri sınırlı olabilir veya devre dışı kalabilir.
 
 ## 🐳 Docker
-Projeyi klonladıktan kurduktan sonra (.env dosyasını .env.exapmle'da bahsedildiği gibi)
+Projeyi klonladıktan, kurduktan sonra (.env dosyasını .env.example'da bahsedildiği gibi doldurup)
 
 ```docker-compose up --build```
 
@@ -38,7 +38,7 @@ ile projeyi localde build alabilir veya
 
 ```docker pull zgrenis/borsa-bot```
 
-ile imagine dosyasını yükleyip .env.example dosyasındaki isimlere uygun şekilde keyleri oluşturarak 
+ile imagine dosyasını yükleyip .env.example dosyasındaki isimlerle uygun şekilde keyleri oluşturarak 
 
 
 ```docker run --env-file .env zgrenis/borsa-bot```
@@ -51,7 +51,7 @@ Docker terminaline input vermek için ayrı bir terminalde aşağıdaki kodu yaz
  
 ### ⚙️Önemli Sistem Gereksinimi
 
-LLM modellerinin hızlı ve düzgün çalışabilmesi için GPU üzerinden çalışacak şekilde tasarlanmıştır. Dolayısıyla NVIDIA GPU sürücüleri ve toolkit yüklenmiş, Docker ayaralarından WSL integration ayarının açık olması gerekmektedir.
+LLM modellerinin hızlı ve düzgün çalışabilmesi için GPU üzerinden çalışacak şekilde tasarlanmıştır. Dolayısıyla NVIDIA GPU sürücüleri ve toolkit yüklenmiş, Docker ayarlarından WSL integration ayarının açık olması gerekmektedir.
 
 
 Ekleme: Enis ÖZGÜR
