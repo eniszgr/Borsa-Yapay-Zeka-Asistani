@@ -20,7 +20,7 @@ Geliştirici: Musab DUMAN
 
 ```pip install -r requirements.txt```
 
----
+----------
 ### ⚠️ Önemli Not
 
 Bu projeyi **tam performansla** kullanabilmek için Ollama servisinin çalışır durumda olması gerekmektedir.
@@ -29,4 +29,25 @@ Sistem, yerel olarak **qwen3:4b** modeli ile optimize edilmiştir ve tüm yapay 
 
 > ℹ️ Ollama servisi çalışmıyorsa bazı yapay zekâ özellikleri sınırlı olabilir veya devre dışı kalabilir.
 
+## 🐳 Docker
+Projeyi klonladıktan kurduktan sonra (.env dosyasını .env.exapmle'da bahsedildiği gibi)
 
+```docker-compose up --build```
+
+ile projeyi localde build alabilir veya 
+
+```docker pull zgrenis/borsa-bot```
+
+ile imagine dosyasını yükleyip .env.example dosyasındaki isimlere uygun şekilde keyleri oluşturarak 
+
+
+```docker run --env-file .env zgrenis/borsa-bot```
+
+ kodu ile projeyi çalıştırabilirsiniz.
+ 
+### ⚙️Önemli Sistem Gereksinimi
+
+LLM modellerinin hızlı ve düzgün çalışabilmesi için GPU üzerinden çalışacak şekilde tasarlanmıştır. Dolayısıyla NVIDIA GPU sürücüleri ve toolkit yüklenmiş, Docker ayaralarından WSL integration ayarının açık olması gerekmektedir.
+
+
+Ekleme: Enis ÖZGÜR
